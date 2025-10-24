@@ -32,9 +32,10 @@ namespace FrenchBookApp
 
                 var responseString = await response.Content.ReadAsStringAsync(); // responseString is string form of the returned JSON
 
-                //  following is code to extract the actual translation as reponseJson is in format of : {"translatedText":"bienvenue"}
+                //  following is code to extract the actual translation because reponseJson is in format of : {"translatedText":"bienvenue"}
                 using JsonDocument doc = JsonDocument.Parse(responseString);
                 string translatedText = doc.RootElement.GetProperty("translatedText").GetString();
+                //Console.WriteLine(translatedText);
                 return translatedText;
             }
             catch (Exception ex)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrenchBookApp
 {
-    internal class Paragraph
+    public class Paragraph
     {
         // Scalar properties
         public int ParagraphId { get; set; }
