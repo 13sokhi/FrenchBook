@@ -55,12 +55,10 @@ namespace FrenchBookApp
 
                 foreach (var topic in topics)
                 {
-                    Console.WriteLine(topic.TopicName);
-
                     Border card = new Border();
                     card.Width = 250;
                     card.Height = 120;
-                    card.CornerRadius = new CornerRadius(10);
+                    card.CornerRadius = new CornerRadius(5);
                     card.Background = Brushes.White;
                     card.BorderBrush = Brushes.Gray;
                     card.BorderThickness = new Thickness(1);
