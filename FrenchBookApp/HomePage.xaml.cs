@@ -64,6 +64,7 @@ namespace FrenchBookApp
                     card.BorderThickness = new Thickness(1);
                     card.Margin = new Thickness(10);
                     card.Padding = new Thickness(10);
+                    card.Cursor = Cursors.Hand;
 
                     TextBlock title = new TextBlock();
                     title.Text = topic.TopicName;
@@ -73,13 +74,12 @@ namespace FrenchBookApp
                     title.VerticalAlignment = VerticalAlignment.Center;
 
 
-                    // adding mouse hover changes
+                    // adding mouse hover changes on each topic
                     card.MouseEnter += (s, e) =>
                     {
                         card.Background = new SolidColorBrush(Color.FromRgb(230, 240, 255)); // light blue
                         card.BorderBrush = Brushes.SteelBlue;
                     };
-
                     card.MouseLeave += (s, e) =>
                     {
                         card.Background = Brushes.White;

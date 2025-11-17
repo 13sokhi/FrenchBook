@@ -24,7 +24,7 @@
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                     <Button Content="Delete" Click="DeleteTopic_Click" Width="80" Height="35" Margin="0,0,20,0" VerticalAlignment="Center" Background="White" Foreground="#2C3E50" FontWeight="Bold" DockPanel.Dock="Right" BorderThickness="0" Cursor="Hand"/>
 
-                    <Button Content="Settings" Click="Back_Click" Width="80" Height="35" Margin="0,0,20,0" VerticalAlignment="Center" Background="White" Foreground="#2C3E50" FontWeight="Bold" DockPanel.Dock="Right" BorderThickness="0" Cursor="Hand"/>
+                    <Button Content="Settings" Click="Setting_Click" Width="80" Height="35" Margin="0,0,20,0" VerticalAlignment="Center" Background="White" Foreground="#2C3E50" FontWeight="Bold" DockPanel.Dock="Right" BorderThickness="0" Cursor="Hand"/>
                 </StackPanel>
             </DockPanel>
         </Border>

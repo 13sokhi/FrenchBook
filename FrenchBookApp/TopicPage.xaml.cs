@@ -21,10 +21,13 @@ namespace FrenchBookApp
     public partial class TopicPage : Page
     {
         private Topic Topic { get; set; }
+        private int defaultSpeechRate = 0;
+        private int speechRate;
 
         public TopicPage(Topic Topic)
         {
             this.Topic = Topic;
+            this.speechRate = this.defaultSpeechRate;
             InitializeComponent();
         }
 
@@ -56,18 +59,21 @@ namespace FrenchBookApp
             }
         }
 
+        private void Setting_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingWin = new SettingsWindow();
+            bool? dialogResult = settingWin.ShowDialog();
+
+            if (dialogResult == true) // picking up SelectedSpeechRate from SettingsWindow only when OK is clicked
+            {
+                this.speechRate = settingWin.SelectedSpeechRate;
+                Console.WriteLine(settingWin.SelectedSpeechRate);
+            }
+        }
+
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            //int sentenceId = (int)button.Tag;
-            //using (var db = new FrenchBookContext())
-            //{
-            //    var sentenceToDelete = db.Sentences.Where(s => s.SentenceId == sentenceId);
-            //    db.Sentences.RemoveRange(sentenceToDelete);
-            //    db.SaveChanges();
-            //    LoadTranslations();
-            //}
-
             var tagObject = button.Tag; // tagObject could be of type of Sentence or Paragraph
 
             using (var db = new FrenchBookContext())
@@ -90,7 +96,14 @@ namespace FrenchBookApp
         private void PlayAudio_Click(object sender, RoutedEventArgs e)
         {
             var senderButton = sender as Button;
-            SpeechTranslator.Speak(senderButton?.Tag.ToString());
+            SpeechTranslator.Speak(senderButton?.Tag.ToString(), this.speechRate);
+        }
+
+        public void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            var senderButton = sender as Button;
+            string textToCopy = senderButton.Tag.ToString();
+            Clipboard.SetText(textToCopy);
         }
 
         private void TranslateButton_Click(object sender, RoutedEventArgs e)
@@ -176,6 +189,17 @@ namespace FrenchBookApp
                         listenButton.Margin = new Thickness(0, 10, 20, 0);
                         listenButton.Tag = sentence.FrenchText;
                         listenButton.Click += PlayAudio_Click;
+                        listenButton.Cursor = Cursors.Hand;
+
+                        Button copyButton = new Button();
+                        copyButton.Content = "⧉ Copy";
+                        copyButton.Width = 100;
+                        copyButton.Height = 30;
+                        copyButton.HorizontalAlignment = HorizontalAlignment.Left;
+                        copyButton.Margin = new Thickness(0, 10, 20, 0);
+                        copyButton.Tag = sentence.FrenchText;
+                        copyButton.Click += Copy_Click;
+                        copyButton.Cursor = Cursors.Hand;
 
                         Button deleteButton = new Button();
                         deleteButton.Content = "Delete";
@@ -183,18 +207,18 @@ namespace FrenchBookApp
                         deleteButton.Height = 30;
                         deleteButton.HorizontalAlignment = HorizontalAlignment.Left;
                         deleteButton.Margin = new Thickness(0, 10, 0, 0);
-                        //deleteButton.Tag = sentence.SentenceId;
                         deleteButton.Tag = sentence;
                         deleteButton.Click += Delete_Click;
-
+                        deleteButton.Cursor = Cursors.Hand;
 
                         buttonPanel.Children.Add(listenButton);
+                        buttonPanel.Children.Add(copyButton);
                         buttonPanel.Children.Add(deleteButton);
                         translationContent.Children.Add(englishText);
                         translationContent.Children.Add(frenchText);
                         translationContent.Children.Add(buttonPanel);
                         translationBlock.Child = translationContent;
-
+                        
                         SentencesPanel.Children.Add(translationBlock);
                     }
                 }
@@ -247,7 +271,6 @@ namespace FrenchBookApp
                         deleteButton.Height = 30;
                         deleteButton.HorizontalAlignment = HorizontalAlignment.Left;
                         deleteButton.Margin = new Thickness(0, 10, 0, 0);
-                        //deleteButton.Tag = paragraph.ParagraphId;
                         deleteButton.Tag = paragraph;
                         deleteButton.Click += Delete_Click;
 
