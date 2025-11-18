@@ -53,6 +53,7 @@ namespace FrenchBookApp
                 TopicsPanel.Children.Clear();
 
                 List<Topic> topics = db.Topics.ToList<Topic>();
+                topics.Sort((t1, t2) => t1.TopicName.CompareTo(t2.TopicName)); // adding alphabetically
 
                 foreach (var topic in topics)
                 {
