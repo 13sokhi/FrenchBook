@@ -36,6 +36,7 @@ namespace FrenchBookApp
                 newTopic.TopicName = NewTopicTextBox.Text;
                 db.Topics.Add(newTopic);
                 db.SaveChanges();
+                NewTopicTextBox.Text = "";
                 LoadTopics();
             }
         }

@@ -191,15 +191,25 @@ namespace FrenchBookApp
                         listenButton.Click += PlayAudio_Click;
                         listenButton.Cursor = Cursors.Hand;
 
-                        Button copyButton = new Button();
-                        copyButton.Content = "⧉ Copy";
-                        copyButton.Width = 100;
-                        copyButton.Height = 30;
-                        copyButton.HorizontalAlignment = HorizontalAlignment.Left;
-                        copyButton.Margin = new Thickness(0, 10, 20, 0);
-                        copyButton.Tag = sentence.FrenchText;
-                        copyButton.Click += Copy_Click;
-                        copyButton.Cursor = Cursors.Hand;
+                        Button copyEnButton = new Button();
+                        copyEnButton.Content = "⧉ Copy en";
+                        copyEnButton.Width = 100;
+                        copyEnButton.Height = 30;
+                        copyEnButton.HorizontalAlignment = HorizontalAlignment.Left;
+                        copyEnButton.Margin = new Thickness(0, 10, 20, 0);
+                        copyEnButton.Tag = sentence.EnglishText;
+                        copyEnButton.Click += Copy_Click;
+                        copyEnButton.Cursor = Cursors.Hand;
+
+                        Button copyFrButton = new Button();
+                        copyFrButton.Content = "⧉ Copy fr";
+                        copyFrButton.Width = 100;
+                        copyFrButton.Height = 30;
+                        copyFrButton.HorizontalAlignment = HorizontalAlignment.Left;
+                        copyFrButton.Margin = new Thickness(0, 10, 20, 0);
+                        copyFrButton.Tag = sentence.FrenchText;
+                        copyFrButton.Click += Copy_Click;
+                        copyFrButton.Cursor = Cursors.Hand;
 
                         Button deleteButton = new Button();
                         deleteButton.Content = "Delete";
@@ -212,7 +222,8 @@ namespace FrenchBookApp
                         deleteButton.Cursor = Cursors.Hand;
 
                         buttonPanel.Children.Add(listenButton);
-                        buttonPanel.Children.Add(copyButton);
+                        buttonPanel.Children.Add(copyEnButton);
+                        buttonPanel.Children.Add(copyFrButton);
                         buttonPanel.Children.Add(deleteButton);
                         translationContent.Children.Add(englishText);
                         translationContent.Children.Add(frenchText);

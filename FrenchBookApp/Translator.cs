@@ -40,7 +40,7 @@ namespace FrenchBookApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Some error occured!" + ex.Message);
+                MessageBox.Show("Some error occured!\n" + ex.Message + "\nEnsure that LibreTranslate server is running!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return "";
             }
         }
