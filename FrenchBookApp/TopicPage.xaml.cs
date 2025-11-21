@@ -106,14 +106,19 @@ namespace FrenchBookApp
             Clipboard.SetText(textToCopy);
         }
 
-        private void TranslateButton_Click(object sender, RoutedEventArgs e)
+        private void TranslateButtonEnToFr_Click(object sender, RoutedEventArgs e)
         {
-            TranslateText();
+            TranslateText(EnglishInput.Text, "en", "fr");
+        }
+
+        private void TranslateButtonFrToEn_Click(object sender, RoutedEventArgs e)
+        {
+            TranslateText(FrenchInput.Text, "fr", "en");
         }
 
         private async void Save_Translation_Click(object sender, RoutedEventArgs e)
         {
-            await TranslateText();
+            //await TranslateText();
             using (var db = new FrenchBookContext())
             {
                 if (IsParagraph(EnglishInput.Text))
@@ -299,10 +304,23 @@ namespace FrenchBookApp
             }
         }
 
-        public async Task TranslateText()
+        public async Task TranslateText(string text, string sourceLanguage, string targetLanguage)
         {
-            string translatedText = await Translator.Translate(EnglishInput.Text, "en", "fr");
-            FrenchInput.Text = translatedText;
+            if (text.Trim().Equals("") || text is null)
+            {
+                MessageBox.Show("Please enter text to translate!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            string translatedText = await Translator.Translate(text, sourceLanguage, targetLanguage);
+            if (sourceLanguage.Equals("en"))
+            {
+                FrenchInput.Text = translatedText;
+            }
+            else if (sourceLanguage.Equals("fr"))
+            {
+                EnglishInput.Text = translatedText;
+            }
+            //FrenchInput.Text = translatedText;
         }
 
         public bool IsParagraph(string text)
